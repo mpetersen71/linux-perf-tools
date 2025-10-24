@@ -1,0 +1,121 @@
+#########################################
+# AWS CloudShell Scripts (Shell + CLI) #
+#########################################
+
+# Shell history and env
+.bash_history
+.zsh_history
+.env
+*.env
+
+# AWS-specific files
+.aws/
+*.pem
+*.key
+
+# Temp and log files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.~*
+
+# Editor/system files
+.DS_Store
+Thumbs.db
+
+# Python virtual environments (if used)
+venv/
+__pycache__/
+*.pyc
+.cache/
+
+# Node.js (if used)
+node_modules/
+package-lock.json
+
+####################################
+# LibreOffice Temporary Files     #
+####################################
+.~lock.*#
+*.~*
+
+####################################
+# Microsoft Office Temporary Files#
+####################################
+
+# Office auto-recovery and temp files
+~$*
+*.tmp
+*.wbk  # Word backup
+*.asd  # Word auto-recovery
+*.lnk  # Shortcut files sometimes created
+*.bak  # Generic backups
+*.accde  # Access compiled DB
+*.accdr  # Access runtime DB
+*.accdt  # Access template
+*.pptx~  # PowerPoint backups
+*.xlsb~  # Excel binary backups
+
+####################################
+# Visual Studio / .NET Projects   #
+####################################
+
+## Ignore Visual Studio temporary files, build results, and cache ##
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+TestResults/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.dbmdl
+*.dbproj.schemaview
+
+# ASP.NET
+*.Publish.xml
+*.azurePubxml
+publish/
+Generated_Code/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Others
+*.vspscc
+*.vssscc
+*.psess
+*.vsp
+*.psess
+*.vspx
+*.tss
+*.docstates
+*.orig
+
+####################################
+# Terraform (optional future use) #
+####################################
+*.tfstate
+*.tfstate.backup
+.terraform/
