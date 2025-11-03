@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="sar_autoreport_excel.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SarCsvSource" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\fileservername.private.lan\LinuxPerf</Value>
+    </Setting>
+    <Setting Name="Destination" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">\\fileservername.private.lan\LinuxPerfReports</Value>
+    </Setting>
+    <Setting Name="GraphWidth" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="GraphHeight" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="GenerateCSV" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GenerateXLS" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

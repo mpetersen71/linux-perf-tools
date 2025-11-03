@@ -7,9 +7,10 @@ Consider this a work in process
 ---
 
 ## Contents
-| Directory/File                     | Description                                                    |
-|------------------------------------|----------------------------------------------------------------|
-| `perf_capture_requirements`        | Contains documentation on how to collect perf data to process  |
+| Directory/File                     | Description                                                      |
+|------------------------------------|------------------------------------------------------------------|
+| `perf_capture_requirements`        | Contains documentation on how to collect perf data to process    |
+| `sar-autoreport-excel`             | Visual Studio Project that automatically generates Excel Graphs  |
 
 
 ## Getting Started
@@ -21,6 +22,7 @@ This information, scripts and applications are provided as-is for educational an
 
 ### License
 GNU GPL3 License – see the LICENSE file for details.
+Any supporting libraries are unmodified and Licensed separately (I will try to include the library names/licenses)
 
 ### Contributing
 This is a personal project, but contributions or suggestions are welcome! Feel free to open an issue or submit a pull request.
