@@ -10,8 +10,11 @@ year=$(date -d "$input_date" +%Y)
 month=$(date -d "$input_date" +%m)
 day=$(date -d "$input_date" +%d)
 
-# SAR binary file for the previous day
+# SAR binary file for the previous day, also check for sysstat instead of sa
 sar_file="/var/log/sa/sa$day"
+if [ -d "/var/log/sysstat" ]; then
+	sar_file="/var/log/sysstat/sa$day"
+fi
 
 # Set output directory
 output_dir="/home/metrics/perf/$year/$month/$day"

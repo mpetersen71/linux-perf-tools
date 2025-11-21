@@ -1,0 +1,87 @@
+To be able to use the Linux Perf Tools here, you need to setup SYSSTAT SAR as well as process the captured data to CSV Files.
+
+1) Setup user/group/location to process the data.
+
+This example, I create a user account to process and store the CSV files locally on the system, as well as a group to be able to read the files.
+
+useradd -m metrics -c "Metrics User" -g users -u 54350 
+groupadd reports -g 1010
+gpasswd -a metrics reports
+mkdir /home/metrics/perf
+chgrp reports /home/metrics/perf
+chmod g+s /home/metrics/perf
+chmod g+w /home/metrics/perf
+chmod o-rx /home/metrics/perf
+chown metrics /home/metrics/perf
+
+
+2) Install Systat
+
+--- Redhat / OEL ---
+dnf install sysstat
+systemctl enable sysstat-collect.timer
+
+--- Debian ---
+https://wiki.debian.org/sysstat
+Install sysstat:  apt-get install sysstat
+Edit the file /etc/default/sysstat and change ENABLED=false to ENABLED=true, using sed: sed -i 's/\bfalse\b/true/g' /etc/default/sysstat
+Optional: Edit the file /etc/cron.d/sysstat and change the line OnCalendar=*:00/10 to OnCalendar=*:00/15 to adjust the collection interval.
+Reload Systemctl: systemctl daemon-reload
+Enable sysstat: systemctl enable sysstat
+Restart sysstat: systemctl restart sysstat
+
+(note that Debian stores sysstat data in /var/log/sysstat, adjust the scripts accordingly)
+
+3) Copy / Adjust shell scripts
+
+Copy the export_sar_day.sh example script to /home/metrics/bin and set it to be executable.  If you only need the performance data you can use the minimal script, however, soon I will utilize the additional information collected.
+
+In the near future I will also create applications to utilize the current stats.  To already collect the data:
+copy export_sar_day.sh to export_sar_current.sh
+edit input_date=${1:-$(date -d "yesterday" +%Y-%m-%d)} to use "today" instead of yesterday.
+
+
+4) Setup Cron Job
+
+The information collected does not require to be ran as a superuser, so you can add the script in the user's crontab
+
+The export_sar_day.sh script is setup to collect the data from the previous day, so set it to execute after midnight to collect the previous day's data.
+
+If you already want to collect the current data, also setup the export_sar_current.sh cron job.
+
+----- Example Crontab -----
+
+### Crontab Reference
+# ┌──────────── minute (0 - 59)
+# │ ┌────────── hour (0 - 23)
+# │ │ ┌──────── day of month (1 - 31)
+# │ │ │ ┌────── month (1 - 12)
+# │ │ │ │ ┌──── day of week (0 - 7) (Sunday = 0 or 7)
+# │ │ │ │ │
+# │ │ │ │ │
+# * * * * *  command_to_execute
+
+# Daily at 1:10 AM - Generate Previous Days Performance Data
+10 1 * * * /home/metrics/bin/export_sar_day.sh  > /dev/null 2>&1
+
+# Every 11 minutes - Generate Current Performance Data
+*/11 * * * * /home/metrics/bin/export_sar_current.sh  > /dev/null 2>&1
+
+------ End Sample Crontab ------
+
+
+5) Consolidate all Performance Data to a single location
+
+The programs I am writing assume that all of the performance data is consolidated to a single location with each server's data within a folder named after that server.
+
+For Example:
+\\SMBServer\DataLocation\Servername\YYYY\MM\DD
+
+This can be either a Windows Server Share or a Samba Share.  To transfer data I will leave it up to you to sort out, but rsync using SSH keys is a popular solution.
+
+
+
+6) Use the apps to generate report / use web app to track performance (future)
+
+
+The initial program is to simply automatically generate Monthly Performance reports in Excel.
